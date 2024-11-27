@@ -53,52 +53,6 @@ def get_images_average_colors():
     
     return image_colors
 
-# def find_closest_image_by_color(target_color, image_colors):
-#     """
-#     Find image with closest average color to target_color
-#     target_color: string 'rgb(r,g,b)'
-#     image_colors: list of tuples (filename, 'rgb(r,g,b)')
-#     """
-#     # Convert target_color string to RGB values
-#     #target_rgb = [int(x) for x in target_color.strip('rgb()').split(',')]
-#     #target_array = np.array(target_rgb)
-#     target_array = np.array(target_color)
-    
-#     min_distance = float('inf')
-#     closest_image = None
-    
-#     for filename, color in image_colors:
-#         # Convert color string to RGB values
-#         #current_rgb = color #[int(x) for x in color.strip('rgb()').split(',')]
-#         current_array = np.array(color)
-        
-#         # Calculate Euclidean distance between colors
-#         distance = np.sqrt(np.sum((target_array - current_array) ** 2))
-        
-#         if distance < min_distance:
-#             min_distance = distance
-#             closest_image = filename
-            
-#     return closest_image
-
-# def find_closest_image_by_color(target_color, image_colors):
-#     """
-#     Find image with closest average color to target_color using vectorized operations
-#     """
-#     # Convert target_color string to numpy array
-#     target_rgb = target_color #np.array([int(x) for x in target_color.strip('rgb()').split(',')])
-#     color_arrays = np.array([item[1] for item in image_colors])
-
-#     # Pre-process all colors at once
-#     colors = np.array(color_arrays)
-    
-#     # Calculate distances using vectorized operations
-#     distances = np.sqrt(np.sum((colors - target_rgb) ** 2, axis=1))
-    
-#     # Get index of minimum distance
-#     closest_idx = np.argmin(distances)
-    
-#     return image_colors[closest_idx][0]
 
 def find_closest_image_by_color(target_color, image_colors):
     """
@@ -239,48 +193,6 @@ def create_image_mosaic():
 
     return jsonify({'mosaic_path': 'uploads/mosaic_result.jpg'})
 
-
-
-# def create_image_mosaic():
-#     pr = cProfile.Profile()
-#     pr.enable()
-#     if not os.path.exists(app.config['UPLOAD_FOLDER'] + '/current_image.jpg'):
-#         return jsonify({'error': 'No image uploaded'})
-        
-#     # Get original image size
-#     with Image.open(app.config['UPLOAD_FOLDER'] + '/current_image.jpg') as img:
-#         width, height = img.size
-        
-#     # Get average colors and create mosaic
-#     image_colors = get_images_average_colors()
-#     average_colors = calculate_average_colors(app.config['UPLOAD_FOLDER'] + '/current_image.jpg')
-    
-#     # Create new image
-#     mosaic = Image.new('RGB', (width, height))
-#     cell_width = width // len(average_colors[0])
-#     cell_height = height // len(average_colors)
-    
-#     for i, row in enumerate(average_colors):
-#         for j, color in enumerate(row):
-#             closest_image = find_closest_image_by_color(color, image_colors)
-#             with Image.open(os.path.join(IMG_ORIGEN, closest_image)) as img:
-#                 img_resized = img.resize((cell_width, cell_height))
-#                 mosaic.paste(img_resized, (j * cell_width, i * cell_height))
-    
-#     output_path = os.path.join(app.config['UPLOAD_FOLDER'], 'mosaic_result.jpg')
-#     mosaic.save(output_path)
-    
-#     # #######################
-
-#     pr.disable()
-#     s = io.StringIO()
-#     ps = pstats.Stats(pr, stream=s).sort_stats('cumulative')
-#     ps.print_stats()
-    
-#     print('Profiling Results:')
-#     print(s.getvalue())
-#     # #######################
-#     return jsonify({'mosaic_path': 'uploads/mosaic_result.jpg'})
 
 
 if __name__ == '__main__':
