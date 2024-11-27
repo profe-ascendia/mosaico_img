@@ -3,7 +3,7 @@
 
 <head>
     <title>Mosaico Image</title>
-    <style>
+    <!-- <style>
         .image-container {
             position: relative;
             display: inline-block;
@@ -39,7 +39,16 @@
             max-width: 100%;
             height: auto;
         }
-    </style>
+    </style> -->
+        <!-- Add CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        
+
+        
+        <!-- CSRF Token for JavaScript -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    
 </head>
 
 <body>
@@ -77,17 +86,20 @@
 
         <div class="grid" id="grid-overlay" style="display: none;">
             {% for row in average_colors %}
-            {% for color in row %}
-            <div class="grid-cell"></div>
-            {% endfor %}
+                {% for color in row %}
+                    <div class="grid-cell"></div>
+                {% endfor %}
             {% endfor %}
         </div>
 
         <div class="grid" id="mosaic-overlay" style="display: none;">
             {% for row in average_colors %}
-            {% for color in row %}
-            <div class="mosaic-cell" style="background-color: {{ color }}"></div>
-            {% endfor %}
+                {% for color in row %}
+                    
+                <div class="mosaic-cell" 
+                     style="background-color: rgb({{ color[0] }}, {{ color[1] }}, {{ color[2] }})">
+                </div>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>
@@ -98,7 +110,7 @@
         <h3>Mosaic Result:</h3>
         <img id="mosaic-image" style="max-width: 1600px;">
     </div>
-    <script>
+    <!-- <script>
         // Add event listener when page loads
         document.addEventListener('DOMContentLoaded', function () {
             const mosaicCheckbox = document.getElementById('show_mosaic');
@@ -144,7 +156,9 @@
                     }
                 });
         }       
-    </script>
+    </script> -->
+    <!-- Add JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Grid Viewer</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            pointer-events: none;
+        }
+
+        .grid-overlay.visible {
+            display: block;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .controls {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <input type="checkbox" id="gridToggle">
+        <label for="gridToggle">Show Grid</label>
+    </div>
+
+    <div class="image-container">
+        <img src="{{ image_path }}" alt="Selected Image">
+        <div class="grid-overlay" id="gridOverlay"></div>
+    </div>
+
+    <script>
+        const gridToggle = document.getElementById('gridToggle');
+        const gridOverlay = document.getElementById('gridOverlay');
+
+        gridToggle.addEventListener('change', () => {
+            gridOverlay.classList.toggle('visible', gridToggle.checked);
+        });
+    </script>
+</body>
+</html>

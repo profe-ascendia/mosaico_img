@@ -143,7 +143,7 @@ def uploaded_file(filename):
 
 
 
-@app.route('/create_image_mosaic', methods=['POST'])
+
 @app.route('/create_image_mosaic', methods=['POST'])
 def create_image_mosaic():
     pr = cProfile.Profile()
