@@ -1,3 +1,8 @@
+
+"""
+Esta función toma las imágenes de la carpeta de origen, las redimensiona y 
+las guarda en la carpeta de destino.
+"""
 import os
 from PIL import Image
 
