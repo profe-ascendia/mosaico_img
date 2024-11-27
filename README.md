@@ -1,5 +1,6 @@
 # Mosaico hecho con fotos 
 Esta es una aplicación desarrollada con Flask y utilizando la IA de Cody
+
 Idea: https://robertheaton.com/2018/11/03/programming-project-4-photomosaics/
 
 ## Funcionalidad básica:
